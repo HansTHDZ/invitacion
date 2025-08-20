@@ -610,7 +610,7 @@ body {
     <div class="welcome-floral welcome-floral-1"></div>
     <div class="welcome-floral welcome-floral-2"></div>
     <h2 class="welcome-title">Dustin & Joseline</h2>
-    <p class="welcome-subtitle">12 de Diciembre, 2025</p>
+    <p class="welcome-subtitle">13 de Diciembre, 2025</p>
     <p class="welcome-text">Con gran alegría queremos compartir contigo el día más especial de nuestras vidas.</p>
     <p class="welcome-text">Tu presencia es el regalo más valioso que podríamos recibir.</p>
     <button id="enterButton" class="enter-button">Descubrir Invitación</button>
@@ -660,7 +660,7 @@ body {
       </div>
     </div>
     <div id="countdown-message" class="countdown-message">
-      ¡Hoy es el gran día! Nos casamos. Te esperamos en nuestra ceremonia.
+      ¡Hoy es el gran día! Nos casamos. Te esperamos en nuestra ceremonia a las 5:00 PM.
     </div>
   </div>
 
@@ -688,8 +688,9 @@ body {
   <div class="details">
     <div class="detail-item">
       <h2 class="detail-title">Nuestra Celebración</h2>
-      <p class="wedding-date">12 de Diciembre, 2025</p>
-      <p class="detail-content">A las 5:00 de la tarde</p>
+      <p class="wedding-date">13 de Diciembre, 2025</p>
+      <p class="detail-content">Ceremonia: 5:00 de la tarde</p>
+      <p class="detail-content">Recepción: 6:30 de la tarde</p>
     </div>
 
     <div class="detail-item">
@@ -761,9 +762,9 @@ function createDecorations() {
 
 createDecorations();
 
-// Temporizador para la boda (12 de diciembre de 2025)
+// Temporizador para la boda (13 de diciembre de 2025 a las 17:00)
 function updateCountdown() {
-  const weddingDate = new Date('2025-12-12T17:00:00');
+  const weddingDate = new Date('2025-12-13T17:00:00');
   const now = new Date();
   const difference = weddingDate - now;
   
@@ -777,9 +778,21 @@ function updateCountdown() {
   document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
   document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
   
-  // Mostrar mensaje especial si es el día de la boda
-  if (days === 0 && hours <= 24) {
+  // Mostrar mensaje especial si es el día de la boda (13 de diciembre)
+  const today = new Date();
+  if (today.getDate() === 13 && today.getMonth() === 11 && today.getFullYear() === 2025) {
     document.getElementById('countdown-message').style.display = 'block';
+    document.getElementById('countdown-message').innerHTML = 
+      '¡Hoy es el gran día! Nos casamos. Te esperamos en nuestra ceremonia a las 5:00 PM.';
+    document.querySelector('.countdown-title').textContent = '¡Hoy es nuestro día!';
+    document.querySelector('.countdown-container').style.display = 'none';
+  } else if (difference < 0) {
+    // Si la boda ya pasó
+    document.getElementById('countdown-message').style.display = 'block';
+    document.getElementById('countdown-message').innerHTML = 
+      '¡Gracias por ser parte de nuestro día especial!';
+    document.querySelector('.countdown-title').textContent = '¡Gracias por acompañarnos!';
+    document.querySelector('.countdown-container').style.display = 'none';
   }
 }
 
@@ -873,5 +886,4 @@ document.addEventListener('keypress', function(e) {
 </script>
 
 </body>
-
 </html>
